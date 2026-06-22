@@ -52,7 +52,7 @@ const content = {
       eyebrow: "Software engineer based in Italy",
       title: "Ghassen Jemiai",
       description:
-        "I build scalable SaaS platforms, payment integrations, automation systems, and AI-backed products. Most of my work sits where product speed, backend reliability, and maintainable systems meet.",
+        "I am a software engineer focused on building practical products that are fast to ship, reliable to run, and easy to maintain. My work spans SaaS platforms, payment flows, automation tools, and AI-backed systems.",
     },
     today: {
       eyebrow: "today",
@@ -252,7 +252,7 @@ const content = {
       eyebrow: "Software engineer basato in Italia",
       title: "Ghassen Jemiai",
       description:
-        "Costruisco piattaforme SaaS scalabili, integrazioni di pagamento, sistemi di automazione e prodotti basati su AI. Il mio lavoro unisce velocita di prodotto, affidabilita backend e sistemi mantenibili.",
+        "Sono un software engineer concentrato sulla costruzione di prodotti pratici, veloci da rilasciare, affidabili in produzione e facili da mantenere. Il mio lavoro include piattaforme SaaS, flussi di pagamento, strumenti di automazione e sistemi basati su AI.",
     },
     today: {
       eyebrow: "oggi",
@@ -448,12 +448,14 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-6 flex items-end justify-between gap-4">
-      <div>
+      <div className="min-w-0">
         <p className="flex items-center gap-2 font-mono text-xs font-semibold uppercase text-blueprint">
           <Icon className="h-4 w-4" aria-hidden="true" />
           {eyebrow}
         </p>
-        <h2 className="mt-2 text-3xl font-semibold leading-tight">{title}</h2>
+        <h2 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
+          {title}
+        </h2>
       </div>
     </div>
   );
@@ -461,18 +463,18 @@ function SectionTitle({
 
 function HeroMark() {
   return (
-    <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-[2rem] border border-line bg-surface shadow-beam sm:mx-0">
+    <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-[1.5rem] border border-line bg-surface shadow-beam sm:mx-0 sm:h-36 sm:w-36 sm:rounded-[2rem]">
       <div className="absolute inset-0 soft-grid opacity-70" />
-      <div className="absolute left-5 top-5 h-12 w-12 rounded-2xl bg-blueprint text-center font-mono text-lg font-bold leading-[3rem] text-white">
+      <div className="absolute left-4 top-4 h-10 w-10 rounded-xl bg-blueprint text-center font-mono text-base font-bold leading-10 text-white sm:left-5 sm:top-5 sm:h-12 sm:w-12 sm:rounded-2xl sm:text-lg sm:leading-[3rem]">
         GJ
       </div>
-      <div className="absolute bottom-5 left-5 right-5 space-y-2">
-        <div className="h-2 w-24 rounded-full bg-ink/80" />
-        <div className="h-2 w-16 rounded-full bg-blueprint" />
-        <div className="h-2 w-20 rounded-full bg-mint" />
+      <div className="absolute bottom-4 left-4 right-4 space-y-1.5 sm:bottom-5 sm:left-5 sm:right-5 sm:space-y-2">
+        <div className="h-2 w-20 rounded-full bg-ink/80 sm:w-24" />
+        <div className="h-2 w-14 rounded-full bg-blueprint sm:w-16" />
+        <div className="h-2 w-16 rounded-full bg-mint sm:w-20" />
       </div>
-      <div className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-rose/20 bg-rose/10 text-rose">
-        <Sparkles className="h-5 w-5" aria-hidden="true" />
+      <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border border-rose/20 bg-rose/10 text-rose sm:right-5 sm:top-5 sm:h-12 sm:w-12 sm:rounded-2xl">
+        <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
       </div>
     </div>
   );
@@ -480,9 +482,9 @@ function HeroMark() {
 
 function TodayPanel({ copy }: { copy: SiteCopy["today"] }) {
   return (
-    <section className="mx-auto w-full max-w-3xl px-5 py-10">
+    <section className="mx-auto w-full max-w-3xl px-4 py-9 sm:px-5 sm:py-10">
       <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={Sparkles} />
-      <div className="rounded-lg border border-line bg-surface/90 p-5 shadow-sm">
+      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-5">
         <div className="space-y-5">
           {copy.items.map((item, index) => (
             <article
@@ -492,7 +494,7 @@ function TodayPanel({ copy }: { copy: SiteCopy["today"] }) {
               <p className="font-mono text-xs font-semibold text-blueprint">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <div>
+              <div className="min-w-0">
                 <h3 className="font-semibold">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink/70">{item.text}</p>
               </div>
@@ -506,7 +508,7 @@ function TodayPanel({ copy }: { copy: SiteCopy["today"] }) {
 
 function ExperienceSection({ copy }: { copy: SiteCopy["experience"] }) {
   return (
-    <section id="experience" className="mx-auto w-full max-w-3xl px-5 py-12">
+    <section id="experience" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
       <SectionTitle
         eyebrow={copy.eyebrow}
         title={copy.title}
@@ -519,19 +521,19 @@ function ExperienceSection({ copy }: { copy: SiteCopy["experience"] }) {
           return (
             <article
               key={item.company}
-              className="group rounded-lg border border-line bg-surface/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam"
+              className="group rounded-lg border border-line bg-surface/90 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam sm:p-5"
             >
               <div className="grid gap-4 sm:grid-cols-[auto_1fr]">
-                <div className="flex h-12 w-12 items-center justify-center rounded-md border border-line bg-paper text-blueprint transition group-hover:border-blueprint">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line bg-paper text-blueprint transition group-hover:border-blueprint">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="text-xl font-semibold leading-tight">
                         {item.company}
                       </h3>
-                      <p className="mt-1 font-mono text-sm text-ink/58">
+                      <p className="mt-1 break-words font-mono text-sm text-ink/58">
                         {item.role} / {item.place}
                       </p>
                     </div>
@@ -540,7 +542,7 @@ function ExperienceSection({ copy }: { copy: SiteCopy["experience"] }) {
                     </p>
                   </div>
                   <p className="mt-4 text-sm leading-6 text-ink/74">{item.summary}</p>
-                  <p className="mt-4 border-t border-line/70 pt-3 font-mono text-xs text-blueprint">
+                  <p className="mt-4 break-words border-t border-line/70 pt-3 font-mono text-xs text-blueprint">
                     {item.stack}
                   </p>
                 </div>
@@ -555,7 +557,7 @@ function ExperienceSection({ copy }: { copy: SiteCopy["experience"] }) {
 
 function ProjectsSection({ copy }: { copy: SiteCopy["projects"] }) {
   return (
-    <section id="projects" className="mx-auto w-full max-w-3xl px-5 py-12">
+    <section id="projects" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
       <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={Layers3} />
       <div className="grid gap-4">
         {copy.items.map((project, index) => (
@@ -564,7 +566,7 @@ function ProjectsSection({ copy }: { copy: SiteCopy["projects"] }) {
             href={project.href}
             target="_blank"
             rel="noreferrer"
-            className="group grid gap-4 rounded-lg border border-line bg-surface/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam sm:grid-cols-[4.5rem_1fr]"
+            className="group grid gap-4 rounded-lg border border-line bg-surface/90 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam sm:grid-cols-[4.5rem_1fr] sm:p-5"
           >
             <div>
               <p className="font-mono text-xs font-semibold text-blueprint">
@@ -574,21 +576,25 @@ function ProjectsSection({ copy }: { copy: SiteCopy["projects"] }) {
                 {project.status}
               </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0">
                   <p className="font-mono text-xs font-semibold uppercase text-rose">
                     {project.type}
                   </p>
-                  <h3 className="mt-2 text-2xl font-semibold">{project.name}</h3>
+                  <h3 className="mt-2 text-xl font-semibold sm:text-2xl">
+                    {project.name}
+                  </h3>
                 </div>
                 <ArrowUpRight
-                  className="h-5 w-5 text-blueprint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="h-5 w-5 shrink-0 text-blueprint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
               </div>
               <p className="mt-4 text-sm leading-6 text-ink/74">{project.description}</p>
-              <p className="mt-4 font-mono text-xs text-ink/52">{project.stack}</p>
+              <p className="mt-4 break-words font-mono text-xs text-ink/52">
+                {project.stack}
+              </p>
             </div>
           </a>
         ))}
@@ -603,12 +609,14 @@ function SkillsSection({ copy }: { copy: SiteCopy["skills"] }) {
   const ActiveIcon = active.icon;
 
   return (
-    <section id="skills" className="mx-auto w-full max-w-3xl px-5 py-12">
+    <section id="skills" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
       <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={BrainCircuit} />
-      <div className="rounded-lg border border-line bg-surface/90 p-5 shadow-sm sm:p-6">
-        <p className="text-lg leading-8 text-ink/76">{copy.intro}</p>
+      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-6">
+        <p className="text-base leading-7 text-ink/76 sm:text-lg sm:leading-8">
+          {copy.intro}
+        </p>
 
-        <div className="mt-6 grid gap-2 sm:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {copy.groups.map((group) => {
             const isActive = activeId === group.id;
 
@@ -618,7 +626,7 @@ function SkillsSection({ copy }: { copy: SiteCopy["skills"] }) {
                 type="button"
                 onClick={() => setActiveId(group.id)}
                 aria-pressed={isActive}
-                className={`h-11 rounded-md border px-3 text-left font-mono text-xs font-semibold uppercase transition ${
+                className={`min-h-11 rounded-md border px-3 py-2 text-left font-mono text-xs font-semibold uppercase transition ${
                   isActive
                     ? "border-blueprint bg-blueprint text-white shadow-sm"
                     : "border-line bg-paper text-ink/62 hover:border-blueprint hover:text-blueprint"
@@ -631,22 +639,24 @@ function SkillsSection({ copy }: { copy: SiteCopy["skills"] }) {
         </div>
 
         <div className="mt-4 grid gap-4 rounded-lg border border-line bg-paper/70 p-4 sm:grid-cols-[auto_1fr]">
-          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-blueprint text-white">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-blueprint text-white">
             <ActiveIcon className="h-5 w-5" aria-hidden="true" />
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">{active.sentence}</h3>
+          <div className="min-w-0">
+            <h3 className="break-words text-lg font-semibold sm:text-xl">
+              {active.sentence}
+            </h3>
             <p className="mt-3 text-sm leading-6 text-ink/70">{active.proof}</p>
-            <div className="mt-5 grid gap-2 sm:grid-cols-4">
+            <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {active.items.map((item, index) => (
                 <div
                   key={item}
-                  className="rounded-md border border-line bg-surface px-3 py-3"
+                  className="min-w-0 rounded-md border border-line bg-surface px-3 py-3"
                 >
                   <p className="font-mono text-[11px] text-ink/42">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <p className="mt-1 text-sm font-semibold">{item}</p>
+                  <p className="mt-1 break-words text-sm font-semibold">{item}</p>
                 </div>
               ))}
             </div>
@@ -659,13 +669,13 @@ function SkillsSection({ copy }: { copy: SiteCopy["skills"] }) {
 
 function EducationSection({ copy }: { copy: SiteCopy["education"] }) {
   return (
-    <section className="mx-auto w-full max-w-3xl px-5 py-12">
+    <section className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
       <SectionTitle
         eyebrow={copy.eyebrow}
         title={copy.title}
         icon={GraduationCap}
       />
-      <div className="rounded-lg border border-line bg-surface/90 p-5 shadow-sm">
+      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-5">
         <div className="space-y-5">
           {copy.items.map((item, index) => (
             <article
@@ -675,12 +685,14 @@ function EducationSection({ copy }: { copy: SiteCopy["education"] }) {
               <p className="font-mono text-xs font-semibold text-blueprint">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <div>
+              <div className="min-w-0">
                 <div className="flex flex-wrap items-baseline justify-between gap-3">
                   <h3 className="text-lg font-semibold">{item.credential}</h3>
                   <p className="font-mono text-xs text-ink/50">{item.period}</p>
                 </div>
-                <p className="mt-1 font-mono text-sm text-ink/58">{item.school}</p>
+                <p className="mt-1 break-words font-mono text-sm text-ink/58">
+                  {item.school}
+                </p>
                 <p className="mt-3 text-sm leading-6 text-ink/70">{item.note}</p>
               </div>
             </article>
@@ -739,7 +751,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-paper text-ink canvas-grid">
-      <header className="mx-auto flex w-full max-w-3xl items-center justify-between px-5 py-5">
+      <header className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5">
         <a href="#top" className="font-mono text-sm font-semibold">
           ghassen jemiai
         </a>
@@ -757,7 +769,7 @@ export default function Home() {
             {copy.nav.contact}
           </a>
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <div
             className="flex h-9 items-center rounded-full border border-line bg-surface p-1 shadow-sm"
             aria-label={copy.actions.languageLabel}
@@ -803,17 +815,19 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="top" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8">
+      <section id="top" className="mx-auto w-full max-w-3xl px-4 pb-10 pt-6 sm:px-5 sm:pb-12 sm:pt-8">
         <div className="grid gap-7 sm:grid-cols-[auto_1fr] sm:items-center">
           <HeroMark />
           <div className="text-center sm:text-left">
             <p className="font-mono text-sm font-semibold uppercase text-blueprint">
               {copy.hero.eyebrow}
             </p>
-            <h1 className="mt-3 text-5xl font-semibold leading-none text-ink sm:text-6xl">
+            <h1 className="mt-3 text-4xl font-semibold leading-none text-ink sm:text-6xl">
               {copy.hero.title}
             </h1>
-            <p className="mt-5 text-lg leading-8 text-ink/74">{copy.hero.description}</p>
+            <p className="mt-5 text-base leading-7 text-ink/74 sm:text-lg sm:leading-8">
+              {copy.hero.description}
+            </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
               <a
                 href={`mailto:${email}`}
@@ -840,14 +854,14 @@ export default function Home() {
       <SkillsSection copy={copy.skills} />
       <EducationSection copy={copy.education} />
 
-      <section id="contact" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8">
-        <div className="rounded-lg border border-line bg-surface/92 p-5 shadow-sm sm:p-6">
+      <section id="contact" className="mx-auto w-full max-w-3xl px-4 pb-10 pt-6 sm:px-5 sm:pb-12 sm:pt-8">
+        <div className="rounded-lg border border-line bg-surface/92 p-4 shadow-sm sm:p-6">
           <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
-            <div>
+            <div className="min-w-0">
               <p className="font-mono text-xs font-semibold uppercase text-blueprint">
                 {copy.contact.eyebrow}
               </p>
-              <h2 className="mt-3 text-3xl font-semibold leading-tight">
+              <h2 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">
                 {copy.contact.title}
               </h2>
             </div>
@@ -860,16 +874,16 @@ export default function Home() {
             </a>
           </div>
           <div className="mt-7 grid gap-3 font-mono text-sm text-ink/66 sm:grid-cols-3">
-            <p className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-blueprint" aria-hidden="true" />
+            <p className="flex min-w-0 items-center gap-2 break-all">
+              <Mail className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
               {email}
             </p>
-            <p className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-blueprint" aria-hidden="true" />
+            <p className="flex min-w-0 items-center gap-2">
+              <Phone className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
               {phone}
             </p>
-            <p className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-blueprint" aria-hidden="true" />
+            <p className="flex min-w-0 items-center gap-2">
+              <MapPin className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
               {copy.contact.location}
             </p>
           </div>

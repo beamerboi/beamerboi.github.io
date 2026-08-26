@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Ghassen Jemiai | Software Engineer",
   description:
     "Software engineer focused on practical SaaS products, payment flows, automation tools, and AI-backed systems.",
-  verification: {
-    google: "0Nwp8PHWXBRXSWlsZ51yywqavshAp4V6e7oMG21TwDs",
-  },
 };
 
 export default function RootLayout({

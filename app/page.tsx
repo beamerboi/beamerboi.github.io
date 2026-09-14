@@ -1,601 +1,346 @@
-"use client";
+﻿"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import {
+  ArrowDown,
+  ArrowUp,
   ArrowUpRight,
-  BrainCircuit,
-  BriefcaseBusiness,
+  Asterisk,
+  Check,
+  ChevronDown,
   Code2,
-  Database,
   Download,
   GraduationCap,
-  Layers3,
-  Mail,
   MapPin,
+  Menu,
   Moon,
-  Phone,
-  Server,
+  Plus,
+  ShieldCheck,
   Sparkles,
   Sun,
-  type LucideIcon,
+  X,
 } from "lucide-react";
-
-const email = "ghassen.jemaii2@gmail.com";
-const phone = "+39 352 059 9620";
+import { content, ui } from "./content";
 
 type Language = "en" | "it";
 type Theme = "light" | "dark";
-
-const languageOptions: { id: Language; label: string }[] = [
-  { id: "en", label: "EN" },
-  { id: "it", label: "IT" },
-];
-
-const content = {
-  en: {
-    nav: {
-      experience: "experience",
-      projects: "projects",
-      skills: "skills",
-      contact: "contact",
-    },
-    actions: {
-      email: "Email",
-      cv: "CV",
-      top: "Top",
-      languageLabel: "Language",
-      themeLabel: "Theme",
-      lightTheme: "Light theme",
-      darkTheme: "Dark theme",
-    },
-    hero: {
-      eyebrow: "Software engineer based in Italy",
-      title: "Ghassen Jemiai",
-      description:
-        "I am a software engineer focused on building practical products that are fast to ship, reliable to run, and easy to maintain. My work spans SaaS platforms, payment flows, automation tools, and AI-backed systems.",
-    },
-    today: {
-      eyebrow: "today",
-      title: "What I'm focused on now",
-      items: [
-        {
-          title: "master's degree in computer science",
-          text: "Studying computer science at Universita di Firenze while building practical software products.",
-        },
-        {
-          title: "building ReGuardian",
-          text: "Building an AI-backed compliance automation product for UK employment contracts, with document analysis, clause mapping, suggested rewrites, and audit trails for HR and legal teams.",
-        },
-      ],
-    },
-    experience: {
-      eyebrow: "past",
-      title: "Experience shaped by product work",
-      items: [
-        {
-          company: "Chicks Group Inc",
-          role: "Product Development Engineer",
-          period: "Sep 2023 - Mar 2026",
-          place: "Toronto, Canada",
-          summary:
-            "Shipped SaaS features, payment flows, SEO templates, realtime chat improvements, and platform performance work.",
-          stack: ".NET Core, SignalR, MySQL, AureliaJS",
-          icon: Server,
-        },
-        {
-          company: "Focus Corporation",
-          role: "Software Engineer",
-          period: "Jan 2023 - Aug 2025",
-          place: "Tunis, Tunisia",
-          summary:
-            "Built enterprise application features, coordinated three developers, and designed AI architectures, agent systems, and RAG solutions.",
-          stack: ".NET, Angular, TypeScript, SQL Server, Python, TensorFlow",
-          icon: BriefcaseBusiness,
-        },
-        {
-          company: "OneTech Business Solutions",
-          role: "Software Engineering Intern",
-          period: "Feb 2023 - May 2023",
-          place: "Tunis, Tunisia",
-          summary:
-            "Built microservices for banking process digitization, integrated Backbase services, and deployed on Linux RHEL.",
-          stack: "Spring Boot, Angular, PostgreSQL, Docker",
-          icon: Code2,
-        },
-      ],
-    },
-    projects: {
-      eyebrow: "projects",
-      title: "Personal product experiments",
-      items: [
-        {
-          name: "ScopePilot",
-          type: "AI SaaS",
-          status: "Building",
-          description:
-            "Analyzes client requests, detects scope drift, and generates change orders with cost estimates.",
-          stack: "AI, SaaS, workflow automation",
-          href: "https://scopepilot.io/",
-        },
-        {
-          name: "Kavoo",
-          type: "Geo-social",
-          status: "Concept",
-          description:
-            "Location-based product for discovering nearby activities, places, and social plans.",
-          stack: "Mobile product, maps, social discovery",
-          href: "https://kavoo.io/",
-        },
-        {
-          name: "ReGuardian",
-          type: "Compliance SaaS",
-          status: "Building",
-          description:
-            "AI-backed compliance automation for UK employment contracts. It analyzes document clauses, maps them to UK employment law and UK GDPR, flags impacted sections, and keeps an audit trail for HR/legal review.",
-          stack: "AI, document analysis, compliance automation",
-          href: "https://reguardian.northlinestudio.io/",
-        },
-      ],
-    },
-    skills: {
-      eyebrow: "skills",
-      title: "A stack organized by how I use it",
-      intro:
-        "Specialized in product engineering and AI systems across backend platforms, workflow automation, enterprise UI, and data-backed services.",
-      groups: [
-        {
-          id: "systems",
-          label: "systems",
-          icon: Server,
-          sentence:
-            "Backend services, API architecture, microservices, event-driven architecture, Kafka, C#, Java, Spring Framework, Django, FastAPI, SignalR, and platform performance.",
-          items: [
-            ".NET Core",
-            "C#",
-            "Java",
-            "Spring Framework",
-            "Django",
-            "FastAPI",
-            "Microservices",
-            "Kafka",
-            "Event-driven",
-          ],
-          proof:
-            "Used across SaaS platforms where reliability, integration quality, and speed matter.",
-        },
-        {
-          id: "ai",
-          label: "ai",
-          icon: BrainCircuit,
-          sentence:
-            "Python, Django, RAG systems, agent workflows, TensorFlow, and applied automation.",
-          items: ["Python", "Django", "RAG", "Agents"],
-          proof:
-            "Applied to enterprise AI architecture, product concepts, and automation-heavy workflows.",
-        },
-        {
-          id: "frontend",
-          label: "frontend",
-          icon: Layers3,
-          sentence:
-            "Angular, AureliaJS, Next.js, TypeScript, Tailwind CSS, Bootstrap, and product workflow screens.",
-          items: [
-            "Angular",
-            "AureliaJS",
-            "Next.js",
-            "TypeScript",
-            "Tailwind CSS",
-            "Bootstrap",
-          ],
-          proof:
-            "Used for practical interfaces tied to real business operations and product teams.",
-        },
-        {
-          id: "data",
-          label: "data",
-          icon: Database,
-          sentence:
-            "SQL Server, MySQL, PostgreSQL, MongoDB, Docker, and deployment-aware service design.",
-          items: ["SQL Server", "MySQL", "PostgreSQL", "MongoDB", "Docker"],
-          proof:
-            "Supports the data layer behind SaaS, banking, and automation systems.",
-        },
-      ],
-    },
-    education: {
-      eyebrow: "education",
-      title: "Formal background, still product-minded",
-      items: [
-        {
-          school: "Universita di Firenze",
-          credential: "Master's Degree in Computer Science",
-          period: "Sep 2025 - Present",
-          note: "Computer science, software systems, and applied product engineering.",
-        },
-        {
-          school: "SESAME",
-          credential: "Degree in Engineering",
-          period: "Sep 2023 - Jul 2025",
-          note: "Engineering foundation with software development and system design.",
-        },
-        {
-          school: "University of Tunis El Manar",
-          credential: "Bachelor's Degree in Computer Science",
-          period: "Sep 2020 - Jun 2023",
-          note: "Computer science fundamentals, databases, algorithms, and software projects.",
-        },
-      ],
-    },
-    contact: {
-      eyebrow: "contact",
-      title: "Building AI-ready platforms, integrations, and automation systems.",
-      location: "Based in Italy",
-    },
-  },
-  it: {
-    nav: {
-      experience: "esperienza",
-      projects: "progetti",
-      skills: "competenze",
-      contact: "contatto",
-    },
-    actions: {
-      email: "Email",
-      cv: "CV",
-      top: "Su",
-      languageLabel: "Lingua",
-      themeLabel: "Tema",
-      lightTheme: "Tema chiaro",
-      darkTheme: "Tema scuro",
-    },
-    hero: {
-      eyebrow: "Software engineer basato in Italia",
-      title: "Ghassen Jemiai",
-      description:
-        "Sono un software engineer concentrato sulla costruzione di prodotti pratici, veloci da rilasciare, affidabili in produzione e facili da mantenere. Il mio lavoro include piattaforme SaaS, flussi di pagamento, strumenti di automazione e sistemi basati su AI.",
-    },
-    today: {
-      eyebrow: "oggi",
-      title: "Su cosa sto lavorando ora",
-      items: [
-        {
-          title: "laurea magistrale in informatica",
-          text: "Studio informatica all'Universita di Firenze mentre costruisco prodotti software concreti.",
-        },
-        {
-          title: "costruendo ReGuardian",
-          text: "Sto costruendo un prodotto di compliance automation basato su AI per contratti di lavoro UK, con analisi documentale, mappatura delle clausole, riscritture suggerite e audit trail per team HR e legal.",
-        },
-      ],
-    },
-    experience: {
-      eyebrow: "percorso",
-      title: "Esperienza costruita sul lavoro di prodotto",
-      items: [
-        {
-          company: "Chicks Group Inc",
-          role: "Product Development Engineer",
-          period: "Set 2023 - Mar 2026",
-          place: "Toronto, Canada",
-          summary:
-            "Ho sviluppato funzionalita SaaS, flussi di pagamento, template SEO, miglioramenti alla chat realtime e lavoro sulle performance della piattaforma.",
-          stack: ".NET Core, SignalR, MySQL, AureliaJS",
-          icon: Server,
-        },
-        {
-          company: "Focus Corporation",
-          role: "Software Engineer",
-          period: "Gen 2023 - Ago 2025",
-          place: "Tunisi, Tunisia",
-          summary:
-            "Ho sviluppato funzionalita per applicazioni enterprise, coordinato tre sviluppatori e progettato architetture AI, sistemi agent-based e soluzioni RAG.",
-          stack: ".NET, Angular, TypeScript, SQL Server, Python, TensorFlow",
-          icon: BriefcaseBusiness,
-        },
-        {
-          company: "OneTech Business Solutions",
-          role: "Software Engineering Intern",
-          period: "Feb 2023 - Mag 2023",
-          place: "Tunisi, Tunisia",
-          summary:
-            "Ho costruito microservizi per la digitalizzazione di processi bancari, integrato servizi Backbase e distribuito su Linux RHEL.",
-          stack: "Spring Boot, Angular, PostgreSQL, Docker",
-          icon: Code2,
-        },
-      ],
-    },
-    projects: {
-      eyebrow: "progetti",
-      title: "Esperimenti di prodotto personali",
-      items: [
-        {
-          name: "ScopePilot",
-          type: "AI SaaS",
-          status: "In sviluppo",
-          description:
-            "Analizza le richieste dei clienti, rileva attivita fuori scope e genera change order con stime di costo.",
-          stack: "AI, SaaS, workflow automation",
-          href: "https://scopepilot.io/",
-        },
-        {
-          name: "Kavoo",
-          type: "Geo-social",
-          status: "Concept",
-          description:
-            "Prodotto location-based per scoprire attivita vicine, luoghi e piani sociali.",
-          stack: "Mobile product, mappe, social discovery",
-          href: "https://kavoo.io/",
-        },
-        {
-          name: "ReGuardian",
-          type: "Compliance SaaS",
-          status: "In sviluppo",
-          description:
-            "Compliance automation basata su AI per contratti di lavoro UK. Analizza le clausole, le collega a UK employment law e UK GDPR, segnala le sezioni impattate e mantiene audit trail per la revisione HR/legal.",
-          stack: "AI, analisi documentale, compliance automation",
-          href: "https://reguardian.northlinestudio.io/",
-        },
-      ],
-    },
-    skills: {
-      eyebrow: "competenze",
-      title: "Stack organizzato per uso pratico",
-      intro:
-        "Specializzato in product engineering e sistemi AI su piattaforme backend, workflow automation, interfacce enterprise e servizi basati su dati.",
-      groups: [
-        {
-          id: "systems",
-          label: "sistemi",
-          icon: Server,
-          sentence:
-            "Servizi backend, architettura API, microservizi, architetture event-driven, Kafka, C#, Java, Spring Framework, Django, FastAPI, SignalR e performance di piattaforma.",
-          items: [
-            ".NET Core",
-            "C#",
-            "Java",
-            "Spring Framework",
-            "Django",
-            "FastAPI",
-            "Microservices",
-            "Kafka",
-            "Event-driven",
-          ],
-          proof:
-            "Usati in piattaforme SaaS dove contano affidabilita, qualita delle integrazioni e velocita.",
-        },
-        {
-          id: "ai",
-          label: "ai",
-          icon: BrainCircuit,
-          sentence:
-            "Python, Django, sistemi RAG, workflow agent-based, TensorFlow e automazione applicata.",
-          items: ["Python", "Django", "RAG", "Agents"],
-          proof:
-            "Applicati ad architetture AI enterprise, concept di prodotto e workflow ad alta automazione.",
-        },
-        {
-          id: "frontend",
-          label: "frontend",
-          icon: Layers3,
-          sentence:
-            "Angular, AureliaJS, Next.js, TypeScript, Tailwind CSS, Bootstrap e schermate di workflow prodotto.",
-          items: [
-            "Angular",
-            "AureliaJS",
-            "Next.js",
-            "TypeScript",
-            "Tailwind CSS",
-            "Bootstrap",
-          ],
-          proof:
-            "Usati per interfacce pratiche legate a operazioni aziendali e team di prodotto.",
-        },
-        {
-          id: "data",
-          label: "dati",
-          icon: Database,
-          sentence:
-            "SQL Server, MySQL, PostgreSQL, MongoDB, Docker e service design orientato al deployment.",
-          items: ["SQL Server", "MySQL", "PostgreSQL", "MongoDB", "Docker"],
-          proof:
-            "Supporta il data layer dietro prodotti SaaS, banking e sistemi di automazione.",
-        },
-      ],
-    },
-    education: {
-      eyebrow: "formazione",
-      title: "Formazione solida, orientata al prodotto",
-      items: [
-        {
-          school: "Universita di Firenze",
-          credential: "Laurea Magistrale in Informatica",
-          period: "Set 2025 - Presente",
-          note: "Informatica, sistemi software e product engineering applicato.",
-        },
-        {
-          school: "SESAME",
-          credential: "Laurea in Ingegneria",
-          period: "Set 2023 - Lug 2025",
-          note: "Base ingegneristica con sviluppo software e system design.",
-        },
-        {
-          school: "University of Tunis El Manar",
-          credential: "Laurea in Informatica",
-          period: "Set 2020 - Giu 2023",
-          note: "Fondamenti di informatica, database, algoritmi e progetti software.",
-        },
-      ],
-    },
-    contact: {
-      eyebrow: "contatto",
-      title: "Costruisco piattaforme AI-ready, integrazioni e sistemi di automazione.",
-      location: "Basato in Italia",
-    },
-  },
-} as const;
-
-type SiteCopy = typeof content.en;
+type SiteCopy = (typeof content)[Language];
 type SkillGroupId = (typeof content.en.skills.groups)[number]["id"];
+const email = "ghassen.jemaii2@gmail.com";
+const phone = "+39 352 059 9620";
+const cvPath = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/my-cv.pdf`;
 
-function SectionTitle({
-  eyebrow,
-  title,
-  icon: Icon,
+type InterfaceCopy = (typeof ui)[Language];
+
+function SectionLabel({
+  number,
+  children,
 }: {
-  eyebrow: string;
-  title: string;
-  icon: LucideIcon;
+  number: string;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="mb-6 flex items-end justify-between gap-4">
-      <div className="min-w-0">
-        <p className="flex items-center gap-2 font-mono text-xs font-semibold uppercase text-blueprint">
-          <Icon className="h-4 w-4" aria-hidden="true" />
-          {eyebrow}
-        </p>
-        <h2 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
-          {title}
-        </h2>
+    <p className="section-label">
+      <span>{number}</span>
+      {children}
+    </p>
+  );
+}
+
+function HeroArtwork({ caption }: { caption: string }) {
+  return (
+    <div className="hero-art" aria-hidden="true">
+      <div className="art-orbit" />
+      <span className="art-cross art-cross-one">+</span>
+      <span className="art-cross art-cross-two">+</span>
+      <svg className="building-blocks" viewBox="0 0 480 430" fill="none">
+        <ellipse
+          cx="247"
+          cy="373"
+          rx="155"
+          ry="26"
+          fill="currentColor"
+          opacity=".035"
+        />
+        <g className="block-bottom">
+          <path
+            d="M94 278 249 195 404 278 249 366Z"
+            fill="#DDFC87"
+            stroke="#202620"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M94 278 249 366V394L94 307Z"
+            fill="#B9D868"
+            stroke="#202620"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M249 366 404 278V307L249 394Z"
+            fill="#C8E977"
+            stroke="#202620"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="m122 278 126-68 126 68-126 71Z"
+            stroke="#8DAD4C"
+            strokeDasharray="4 5"
+          />
+        </g>
+        <g className="block-middle">
+          <path
+            d="M112 187 249 113 386 187 249 263Z"
+            fill="#D8CEFD"
+            stroke="#292238"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M112 187 249 263V302L112 227Z"
+            fill="#AFA0E5"
+            stroke="#292238"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M249 263 386 187V227L249 302Z"
+            fill="#C1B3F1"
+            stroke="#292238"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="m183 192 39-21m13 50 79-43m-116 24 39-21"
+            stroke="#8171B2"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+          <circle cx="135" cy="213" r="3" fill="#F4F0FF" />
+          <circle cx="148" cy="220" r="3" fill="#F4F0FF" />
+          <circle cx="161" cy="227" r="3" fill="#F4F0FF" />
+        </g>
+        <g className="block-top">
+          <path
+            d="M135 100 249 39 363 100 249 164Z"
+            fill="#597AFA"
+            stroke="#1C328A"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M135 100 249 164V214L135 151Z"
+            fill="#3155DC"
+            stroke="#1C328A"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M249 164 363 100V151L249 214Z"
+            fill="#4266ED"
+            stroke="#1C328A"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
+          />
+          <path
+            d="m224 82-29 16 29 16m49-32 29 16-29 16m-17-40-17 49"
+            stroke="white"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="m270 177 20-11m10-5 10-6"
+            stroke="#AABEFF"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </g>
+        <path
+          d="M87 182H53V121H87M410 205h25v63h-25"
+          stroke="currentColor"
+          strokeOpacity=".2"
+          strokeDasharray="4 5"
+        />
+        <circle cx="53" cy="121" r="4" fill="#4266ED" />
+        <circle cx="435" cy="268" r="4" fill="#AFA0E5" />
+      </svg>
+      <div className="art-note art-note-code">
+        <Code2 size={17} />
+        <span>engineered with care</span>
       </div>
+      <div className="art-note art-note-spark">
+        <Sparkles size={18} />
+      </div>
+      <p className="art-caption">{caption}</p>
     </div>
   );
 }
 
-function HeroMark() {
-  return (
-    <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-[1.5rem] border border-line bg-surface shadow-beam sm:mx-0 sm:h-36 sm:w-36 sm:rounded-[2rem]">
-      <div className="absolute inset-0 soft-grid opacity-70" />
-      <div className="absolute left-4 top-4 h-10 w-10 rounded-xl bg-blueprint text-center font-mono text-base font-bold leading-10 text-white sm:left-5 sm:top-5 sm:h-12 sm:w-12 sm:rounded-2xl sm:text-lg sm:leading-[3rem]">
-        GJ
-      </div>
-      <div className="absolute bottom-4 left-4 right-4 space-y-1.5 sm:bottom-5 sm:left-5 sm:right-5 sm:space-y-2">
-        <div className="h-2 w-20 rounded-full bg-ink/80 sm:w-24" />
-        <div className="h-2 w-14 rounded-full bg-blueprint sm:w-16" />
-        <div className="h-2 w-16 rounded-full bg-mint sm:w-20" />
-      </div>
-      <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border border-rose/20 bg-rose/10 text-rose sm:right-5 sm:top-5 sm:h-12 sm:w-12 sm:rounded-2xl">
-        <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-      </div>
-    </div>
-  );
-}
-
-function TodayPanel({ copy }: { copy: SiteCopy["today"] }) {
-  return (
-    <section className="mx-auto w-full max-w-3xl px-4 py-9 sm:px-5 sm:py-10">
-      <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={Sparkles} />
-      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-5">
-        <div className="space-y-5">
-          {copy.items.map((item, index) => (
-            <article
-              key={item.title}
-              className="grid gap-3 border-line/70 pb-5 last:pb-0 sm:grid-cols-[4rem_1fr] [&:not(:last-child)]:border-b"
-            >
-              <p className="font-mono text-xs font-semibold text-blueprint">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <div className="min-w-0">
-                <h3 className="font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink/70">{item.text}</p>
-              </div>
-            </article>
-          ))}
+function ProjectArtwork({ name, copy }: { name: string; copy: InterfaceCopy }) {
+  if (name === "ReGuardian") {
+    return (
+      <div className="project-art project-art-guardian" aria-hidden="true">
+        <div className="guardian-ring" />
+        <div className="document-preview">
+          <div className="document-header">
+            <ShieldCheck size={19} />
+            <span>ReGuardian</span>
+            <span className="document-dot" />
+          </div>
+          <p className="document-title">{copy.document}</p>
+          <div className="document-line" />
+          <div className="document-line short" />
+          <div className="document-highlight">
+            <span />
+            <Check size={13} />
+          </div>
+          <div className="document-line" />
+          <div className="document-line medium" />
+          <div className="document-highlight lavender">
+            <span />
+            <Check size={13} />
+          </div>
+          <div className="document-footer">
+            <ShieldCheck size={13} />
+            {copy.documentStatus}
+          </div>
         </div>
+        <span className="guardian-seal">
+          <ShieldCheck size={26} strokeWidth={1.5} />
+        </span>
       </div>
-    </section>
+    );
+  }
+  if (name === "ScopePilot") {
+    return (
+      <div className="project-art project-art-scope" aria-hidden="true">
+        <div className="scope-orbit" />
+        <div className="scope-orbit second" />
+        <div className="scope-request">
+          <span className="scope-icon">
+            <Sparkles size={18} />
+          </span>
+          {copy.scope}
+          <Plus size={15} />
+        </div>
+        <svg className="scope-connectors" viewBox="0 0 300 94">
+          <path
+            d="M150 0V37M70 93V55Q70 37 88 37H212Q230 37 230 55V93"
+            fill="none"
+            stroke="#9482BF"
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <circle cx="150" cy="37" r="5" fill="#7760AF" />
+        </svg>
+        <div className="scope-results">
+          <span>
+            <Check size={15} />
+            {copy.inScope}
+          </span>
+          <span>
+            <ArrowUpRight size={15} />
+            {copy.outScope}
+          </span>
+        </div>
+        <span className="scope-wordmark">
+          ScopePilot<span>↗</span>
+        </span>
+      </div>
+    );
+  }
+  return (
+    <div className="project-art project-art-kavoo" aria-hidden="true">
+      <svg className="map-lines" viewBox="0 0 360 280" fill="none">
+        <path
+          d="M-25 70C60 160 91-29 208 22S277 163 393 88M-30 99C56 189 105 6 207 51S272 192 397 121M-36 130C56 220 107 42 208 83S279 226 403 154M-26 167C60 254 107 77 211 118S274 260 397 190M-23 202C62 285 109 111 215 152S285 294 403 227"
+          stroke="#B4C8F4"
+          strokeWidth="1.3"
+        />
+        <path
+          d="M53-10 123 300M252-10 304 300M-10 84 372 222"
+          stroke="#C6D6F8"
+          strokeWidth="13"
+        />
+        <path
+          d="M53-10 123 300M252-10 304 300M-10 84 372 222"
+          stroke="#F3F6FF"
+          strokeWidth="10"
+        />
+      </svg>
+      <span className="map-dot map-dot-one">
+        <span>✳</span>
+      </span>
+      <span className="map-dot map-dot-two">
+        <span>☕</span>
+      </span>
+      <span className="map-pin">
+        <MapPin size={29} strokeWidth={1.8} />
+      </span>
+      <div className="kavoo-label">
+        <strong>
+          kavoo<span>✳</span>
+        </strong>
+        <span>{copy.nearby}</span>
+      </div>
+    </div>
   );
 }
 
-function ExperienceSection({ copy }: { copy: SiteCopy["experience"] }) {
+function Projects({
+  copy,
+  labels,
+}: {
+  copy: SiteCopy["projects"];
+  labels: InterfaceCopy;
+}) {
+  const projects = [copy.items[2], copy.items[0], copy.items[1]];
   return (
-    <section id="experience" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
-      <SectionTitle
-        eyebrow={copy.eyebrow}
-        title={copy.title}
-        icon={BriefcaseBusiness}
-      />
-      <div className="space-y-3">
-        {copy.items.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <article
-              key={item.company}
-              className="group rounded-lg border border-line bg-surface/90 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam sm:p-5"
-            >
-              <div className="grid gap-4 sm:grid-cols-[auto_1fr]">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line bg-paper text-blueprint transition group-hover:border-blueprint">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <h3 className="text-xl font-semibold leading-tight">
-                        {item.company}
-                      </h3>
-                      <p className="mt-1 break-words font-mono text-sm text-ink/58">
-                        {item.role} / {item.place}
-                      </p>
-                    </div>
-                    <p className="rounded-full border border-line bg-paper px-3 py-1 font-mono text-xs font-semibold text-ink/58">
-                      {item.period}
-                    </p>
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-ink/74">{item.summary}</p>
-                  <p className="mt-4 break-words border-t border-line/70 pt-3 font-mono text-xs text-blueprint">
-                    {item.stack}
-                  </p>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+    <section
+      id="projects"
+      className="section projects-section"
+      aria-labelledby="projects-title"
+    >
+      <SectionLabel number="01">{labels.selected}</SectionLabel>
+      <div className="section-heading">
+        <h2 id="projects-title">{labels.projectsTitle}</h2>
+        <p>{labels.projectsIntro}</p>
       </div>
-    </section>
-  );
-}
-
-function ProjectsSection({ copy }: { copy: SiteCopy["projects"] }) {
-  return (
-    <section id="projects" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
-      <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={Layers3} />
-      <div className="grid gap-4">
-        {copy.items.map((project, index) => (
+      <div className="project-grid">
+        {projects.map((project, index) => (
           <a
+            className="project-card"
             key={project.name}
             href={project.href}
             target="_blank"
-            rel="noreferrer"
-            className="group grid gap-4 rounded-lg border border-line bg-surface/90 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blueprint hover:shadow-beam sm:grid-cols-[4.5rem_1fr] sm:p-5"
+            rel="noopener noreferrer"
+            aria-label={`${project.name} — ${labels.visit} (${labels.newTab})`}
           >
-            <div>
-              <p className="font-mono text-xs font-semibold text-blueprint">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-2 rounded-full border border-line bg-paper px-2 py-1 text-center font-mono text-[11px] font-semibold text-ink/56">
+            <div className="project-art-wrap">
+              <ProjectArtwork name={project.name} copy={labels} />
+              <span className="project-index">0{index + 1}</span>
+              <span className="project-art-arrow">
+                <ArrowUpRight size={20} />
+              </span>
+            </div>
+            <div className="project-meta">
+              <span>{project.type}</span>
+              <span
+                className={`project-status ${project.status === "Concept" ? "concept" : ""}`}
+              >
+                <i />
                 {project.status}
-              </p>
+              </span>
             </div>
-            <div className="min-w-0">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="font-mono text-xs font-semibold uppercase text-rose">
-                    {project.type}
-                  </p>
-                  <h3 className="mt-2 text-xl font-semibold sm:text-2xl">
-                    {project.name}
-                  </h3>
-                </div>
-                <ArrowUpRight
-                  className="h-5 w-5 shrink-0 text-blueprint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                />
-              </div>
-              <p className="mt-4 text-sm leading-6 text-ink/74">{project.description}</p>
-              <p className="mt-4 break-words font-mono text-xs text-ink/52">
-                {project.stack}
-              </p>
-            </div>
+            <h3>
+              {project.name}
+              <ArrowUpRight size={23} aria-hidden="true" />
+            </h3>
+            <p className="project-description">{project.description}</p>
+            <p className="project-stack">{project.stack}</p>
           </a>
         ))}
       </div>
@@ -603,101 +348,100 @@ function ProjectsSection({ copy }: { copy: SiteCopy["projects"] }) {
   );
 }
 
-function SkillsSection({ copy }: { copy: SiteCopy["skills"] }) {
+function Skills({
+  copy,
+  labels,
+}: {
+  copy: SiteCopy["skills"];
+  labels: InterfaceCopy;
+}) {
   const [activeId, setActiveId] = useState<SkillGroupId>("systems");
-  const active = copy.groups.find((group) => group.id === activeId) ?? copy.groups[0];
+  const active =
+    copy.groups.find((group) => group.id === activeId) ?? copy.groups[0];
   const ActiveIcon = active.icon;
-
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  function handleKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    const last = copy.groups.length - 1;
+    let nextIndex: number;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown")
+      nextIndex = index === last ? 0 : index + 1;
+    else if (event.key === "ArrowLeft" || event.key === "ArrowUp")
+      nextIndex = index === 0 ? last : index - 1;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = last;
+    else return;
+    event.preventDefault();
+    setActiveId(copy.groups[nextIndex].id);
+    tabRefs.current[nextIndex]?.focus();
+  }
   return (
-    <section id="skills" className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
-      <SectionTitle eyebrow={copy.eyebrow} title={copy.title} icon={BrainCircuit} />
-      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-6">
-        <p className="text-base leading-7 text-ink/76 sm:text-lg sm:leading-8">
-          {copy.intro}
-        </p>
-
-        <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {copy.groups.map((group) => {
-            const isActive = activeId === group.id;
-
+    <section
+      id="skills"
+      className="section toolkit-section"
+      aria-labelledby="skills-title"
+    >
+      <SectionLabel number="03">{labels.toolkitLabel}</SectionLabel>
+      <div className="section-heading">
+        <h2 id="skills-title">{labels.toolkitTitle}</h2>
+      </div>
+      <div className="toolkit-layout">
+        <div className="skill-tabs" role="tablist" aria-label={labels.toolkit}>
+          {copy.groups.map((group, index) => {
+            const Icon = group.icon;
             return (
               <button
-                key={group.id}
                 type="button"
+                key={group.id}
+                role="tab"
+                id={`tab-${group.id}`}
+                aria-controls={`panel-${group.id}`}
+                aria-selected={activeId === group.id}
+                tabIndex={activeId === group.id ? 0 : -1}
+                ref={(element) => {
+                  tabRefs.current[index] = element;
+                }}
+                onKeyDown={(event) => handleKeyDown(event, index)}
                 onClick={() => setActiveId(group.id)}
-                aria-pressed={isActive}
-                className={`min-h-11 rounded-md border px-3 py-2 text-left font-mono text-xs font-semibold uppercase transition ${
-                  isActive
-                    ? "border-blueprint bg-blueprint text-white shadow-sm"
-                    : "border-line bg-paper text-ink/62 hover:border-blueprint hover:text-blueprint"
-                }`}
+                className={
+                  activeId === group.id ? "skill-tab active" : "skill-tab"
+                }
               >
-                {group.label}
+                <Icon size={20} aria-hidden="true" />
+                <span>{labels.skillNames[group.id]}</span>
+                <ArrowUpRight size={18} aria-hidden="true" />
               </button>
             );
           })}
         </div>
-
-        <div className="mt-4 grid gap-4 rounded-lg border border-line bg-paper/70 p-4 sm:grid-cols-[auto_1fr]">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-blueprint text-white">
-            <ActiveIcon className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <div className="min-w-0">
-            <h3 className="break-words text-lg font-semibold sm:text-xl">
-              {active.sentence}
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-ink/70">{active.proof}</p>
-            <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {active.items.map((item, index) => (
-                <div
-                  key={item}
-                  className="min-w-0 rounded-md border border-line bg-surface px-3 py-3"
-                >
-                  <p className="font-mono text-[11px] text-ink/42">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p className="mt-1 break-words text-sm font-semibold">{item}</p>
+        {copy.groups.map((group) => (
+          <div
+            key={group.id}
+            id={`panel-${group.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${group.id}`}
+            tabIndex={0}
+            hidden={activeId !== group.id}
+            className="skill-panel"
+          >
+            {activeId === group.id && (
+              <>
+                <span className={`skill-panel-icon icon-${active.id}`}>
+                  <ActiveIcon size={29} strokeWidth={1.5} aria-hidden="true" />
+                </span>
+                <h3>{labels.skillDescriptions[active.id]}</h3>
+                <p>{active.proof}</p>
+                <div className="skill-tags">
+                  {active.items.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function EducationSection({ copy }: { copy: SiteCopy["education"] }) {
-  return (
-    <section className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-5 sm:py-12">
-      <SectionTitle
-        eyebrow={copy.eyebrow}
-        title={copy.title}
-        icon={GraduationCap}
-      />
-      <div className="rounded-lg border border-line bg-surface/90 p-4 shadow-sm sm:p-5">
-        <div className="space-y-5">
-          {copy.items.map((item, index) => (
-            <article
-              key={item.school}
-              className="grid gap-3 border-line/70 pb-5 last:pb-0 sm:grid-cols-[4.5rem_1fr] [&:not(:last-child)]:border-b"
-            >
-              <p className="font-mono text-xs font-semibold text-blueprint">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-baseline justify-between gap-3">
-                  <h3 className="text-lg font-semibold">{item.credential}</h3>
-                  <p className="font-mono text-xs text-ink/50">{item.period}</p>
-                </div>
-                <p className="mt-1 break-words font-mono text-sm text-ink/58">
-                  {item.school}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-ink/70">{item.note}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        ))}
       </div>
     </section>
   );
@@ -706,199 +450,382 @@ function EducationSection({ copy }: { copy: SiteCopy["education"] }) {
 export default function Home() {
   const [language, setLanguage] = useState<Language>("en");
   const [theme, setTheme] = useState<Theme>("light");
-  const copy = content[language] as SiteCopy;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const copy = content[language];
+  const labels = ui[language];
   const ThemeIcon = theme === "dark" ? Sun : Moon;
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("language");
+    let savedLanguage: string | null = null;
+    let savedTheme: string | null = null;
+    try {
+      savedLanguage = window.localStorage.getItem("language");
+      savedTheme = window.localStorage.getItem("theme");
+    } catch {
+      /* Browser storage is optional. */
+    }
     const nextLanguage =
       savedLanguage === "en" || savedLanguage === "it"
         ? savedLanguage
         : navigator.language.toLowerCase().startsWith("it")
           ? "it"
           : "en";
-
-    window.setTimeout(() => setLanguage(nextLanguage), 0);
-  }, []);
-
-  useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme");
     const nextTheme =
-      savedTheme === "light" || savedTheme === "dark"
-        ? savedTheme
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-
-    window.setTimeout(() => setTheme(nextTheme), 0);
+      savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+    const timer = window.setTimeout(() => {
+      setLanguage(nextLanguage);
+      setTheme(nextTheme);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
-
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButton.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
   function changeLanguage(nextLanguage: Language) {
     setLanguage(nextLanguage);
-    window.localStorage.setItem("language", nextLanguage);
+    try {
+      window.localStorage.setItem("language", nextLanguage);
+    } catch {
+      /* Optional preference persistence. */
+    }
   }
-
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
-
     setTheme(nextTheme);
-    window.localStorage.setItem("theme", nextTheme);
+    try {
+      window.localStorage.setItem("theme", nextTheme);
+    } catch {
+      /* Optional preference persistence. */
+    }
   }
+  const navLinks = [
+    { href: "#projects", label: labels.work },
+    { href: "#experience", label: labels.about },
+    { href: "#skills", label: labels.toolkit },
+  ];
 
   return (
-    <main className="min-h-screen bg-paper text-ink canvas-grid">
-      <header className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5">
-        <a href="#top" className="font-mono text-sm font-semibold">
-          ghassen jemiai
-        </a>
-        <nav className="hidden items-center gap-5 font-mono text-xs text-ink/68 sm:flex">
-          <a className="transition hover:text-blueprint" href="#experience">
-            {copy.nav.experience}
-          </a>
-          <a className="transition hover:text-blueprint" href="#projects">
-            {copy.nav.projects}
-          </a>
-          <a className="transition hover:text-blueprint" href="#skills">
-            {copy.nav.skills}
-          </a>
-          <a className="transition hover:text-blueprint" href="#contact">
-            {copy.nav.contact}
-          </a>
-        </nav>
-        <div className="ml-auto flex items-center gap-2">
-          <div
-            className="flex h-9 items-center rounded-full border border-line bg-surface p-1 shadow-sm"
-            aria-label={copy.actions.languageLabel}
-          >
-            {languageOptions.map((option) => {
-              const isActive = language === option.id;
-
-              return (
-                <button
-                  key={option.id}
-                  type="button"
-                  onClick={() => changeLanguage(option.id)}
-                  className={`h-7 rounded-full px-2 font-mono text-[11px] font-semibold transition ${
-                    isActive
-                      ? "bg-blueprint text-white"
-                      : "text-ink/62 hover:text-blueprint"
-                  }`}
-                  aria-pressed={isActive}
-                >
-                  {option.label}
-                </button>
-              );
-            })}
-          </div>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-blueprint shadow-sm transition hover:border-blueprint"
-            aria-label={
-              theme === "dark" ? copy.actions.lightTheme : copy.actions.darkTheme
-            }
-            title={theme === "dark" ? copy.actions.lightTheme : copy.actions.darkTheme}
-          >
-            <ThemeIcon className="h-4 w-4" aria-hidden="true" />
-          </button>
+    <>
+      <a className="skip-link" href="#main-content">
+        {labels.skip}
+      </a>
+      <header className="site-header" id="top">
+        <div className="header-inner container">
           <a
-            href="/my-cv.pdf"
-            className="inline-flex h-9 items-center gap-2 rounded-full border border-line bg-surface px-3 font-mono text-xs font-semibold text-blueprint shadow-sm transition hover:border-blueprint"
+            className="wordmark"
+            href="#top"
+            aria-label="Ghassen Jemiai — home"
           >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            {copy.actions.cv}
+            <span className="monogram">
+              g<span>j</span>
+              <i />
+            </span>
+            <span className="wordmark-name">
+              Ghassen Jemiai<span>Software engineer</span>
+            </span>
           </a>
+          <nav
+            className="desktop-nav"
+            aria-label={
+              language === "it" ? "Navigazione principale" : "Main navigation"
+            }
+          >
+            {navLinks.map((link) => (
+              <a href={link.href} key={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <div
+              className="language-control"
+              role="group"
+              aria-label={copy.actions.languageLabel}
+            >
+              {(["en", "it"] as const).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  lang={option}
+                  aria-label={option === "en" ? "English" : "Italiano"}
+                  aria-pressed={language === option}
+                  onClick={() => changeLanguage(option)}
+                >
+                  {option.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="icon-button theme-button"
+              onClick={toggleTheme}
+              aria-label={
+                theme === "dark"
+                  ? copy.actions.lightTheme
+                  : copy.actions.darkTheme
+              }
+              title={
+                theme === "dark"
+                  ? copy.actions.lightTheme
+                  : copy.actions.darkTheme
+              }
+            >
+              <ThemeIcon size={17} aria-hidden="true" />
+            </button>
+            <a className="header-contact" href="#contact">
+              {labels.contact}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+            <button
+              ref={menuButton}
+              type="button"
+              className="icon-button menu-button"
+              aria-label={menuOpen ? labels.closeMenu : labels.menu}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
-      </header>
-
-      <section id="top" className="mx-auto w-full max-w-3xl px-4 pb-10 pt-6 sm:px-5 sm:pb-12 sm:pt-8">
-        <div className="grid gap-7 sm:grid-cols-[auto_1fr] sm:items-center">
-          <HeroMark />
-          <div className="text-center sm:text-left">
-            <p className="font-mono text-sm font-semibold uppercase text-blueprint">
-              {copy.hero.eyebrow}
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold leading-none text-ink sm:text-6xl">
-              {copy.hero.title}
-            </h1>
-            <p className="mt-5 text-base leading-7 text-ink/74 sm:text-lg sm:leading-8">
-              {copy.hero.description}
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
+        <nav
+          id="mobile-nav"
+          className="mobile-nav container"
+          aria-label={
+            language === "it" ? "Navigazione mobile" : "Mobile navigation"
+          }
+          hidden={!menuOpen}
+        >
+          {[...navLinks, { href: "#contact", label: labels.contact }].map(
+            (link) => (
               <a
-                href={`mailto:${email}`}
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-4 font-mono text-xs font-semibold text-blueprint shadow-sm transition hover:border-blueprint"
+                href={link.href}
+                key={link.href}
+                onClick={() => setMenuOpen(false)}
               >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                {copy.actions.email}
+                {link.label}
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            ),
+          )}
+        </nav>
+      </header>
+      <main id="main-content" className="container" tabIndex={-1}>
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="hero-eyebrow">
+              <span className="status-dot" />
+              {labels.location}
+            </p>
+            <h1 id="hero-title">
+              {labels.headline[0]}
+              <br />
+              <span>
+                {labels.headline[1]}
+                <svg
+                  viewBox="0 0 570 16"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path d="M3 11Q240-3 565 7" />
+                </svg>
+              </span>
+            </h1>
+            <p className="hero-intro">
+              <strong>{labels.hello}</strong>
+              <br />
+              {labels.intro}
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                {labels.explore}
+                <ArrowDown size={17} aria-hidden="true" />
               </a>
               <a
-                href="/my-cv.pdf"
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-4 font-mono text-xs font-semibold text-blueprint shadow-sm transition hover:border-blueprint"
+                className="button button-text"
+                href={cvPath}
+                download="Ghassen-Jemiai-CV.pdf"
               >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                {copy.actions.cv}
+                {labels.resume}
+                <Download size={16} aria-hidden="true" />
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <TodayPanel copy={copy.today} />
-      <ExperienceSection copy={copy.experience} />
-      <ProjectsSection copy={copy.projects} />
-      <SkillsSection copy={copy.skills} />
-      <EducationSection copy={copy.education} />
-
-      <section id="contact" className="mx-auto w-full max-w-3xl px-4 pb-10 pt-6 sm:px-5 sm:pb-12 sm:pt-8">
-        <div className="rounded-lg border border-line bg-surface/92 p-4 shadow-sm sm:p-6">
-          <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
-            <div className="min-w-0">
-              <p className="font-mono text-xs font-semibold uppercase text-blueprint">
-                {copy.contact.eyebrow}
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">
-                {copy.contact.title}
-              </h2>
-            </div>
+          <HeroArtwork caption={labels.illustration} />
+        </section>
+        <aside className="now-strip" aria-label={copy.today.title}>
+          <p>
+            <span className="status-dot" />
+            {labels.current}
+          </p>
+          <a
+            href={copy.projects.items[2].href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="now-icon lime">
+              <Code2 size={17} aria-hidden="true" />
+            </span>
+            {labels.building}
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+          <a href="#education">
+            <span className="now-icon lilac">
+              <GraduationCap size={19} aria-hidden="true" />
+            </span>
+            {labels.studying}
+            <ArrowDown size={14} aria-hidden="true" />
+          </a>
+        </aside>
+        <Projects copy={copy.projects} labels={labels} />
+        <section
+          id="experience"
+          className="section experience-section"
+          aria-labelledby="experience-title"
+        >
+          <div className="experience-intro">
+            <SectionLabel number="02">{labels.experienceLabel}</SectionLabel>
+            <h2 id="experience-title">{labels.experienceTitle}</h2>
+            <p>{labels.experienceIntro}</p>
             <a
-              href={`mailto:${email}`}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-blueprint bg-blueprint px-4 font-mono text-xs font-semibold text-white transition hover:bg-ink"
+              className="text-link"
+              href={cvPath}
+              download="Ghassen-Jemiai-CV.pdf"
             >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              {copy.actions.email}
+              {labels.resume}
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+            <Asterisk
+              className="experience-asterisk"
+              strokeWidth={1.1}
+              aria-hidden="true"
+            />
+          </div>
+          <div className="experience-list">
+            {copy.experience.items.map((item, index) => (
+              <article key={item.company} className="experience-item">
+                <div
+                  className={`company-mark company-${index}`}
+                  aria-hidden="true"
+                >
+                  {index === 0 ? "cg" : index === 1 ? "f." : "ot"}
+                </div>
+                <div className="experience-body">
+                  <p className="experience-period">{item.period}</p>
+                  <h3>{item.company}</h3>
+                  <p className="experience-role">{item.role}</p>
+                  <p className="experience-summary">{item.summary}</p>
+                  <details className="role-details">
+                    <summary>
+                      {labels.roleDetails}
+                      <ChevronDown size={14} aria-hidden="true" />
+                    </summary>
+                    <div>
+                      <p>
+                        <MapPin size={13} aria-hidden="true" />
+                        {item.place}
+                      </p>
+                      <p>{item.stack}</p>
+                    </div>
+                  </details>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <Skills copy={copy.skills} labels={labels} />
+        <section
+          id="education"
+          className="section education-section"
+          aria-labelledby="education-title"
+        >
+          <SectionLabel number="04">{labels.educationLabel}</SectionLabel>
+          <div className="section-heading">
+            <h2 id="education-title">{labels.educationTitle}</h2>
+            <GraduationCap size={31} strokeWidth={1.3} aria-hidden="true" />
+          </div>
+          <div className="education-grid">
+            {copy.education.items.map((item, index) => (
+              <article key={item.school} className="education-item">
+                <p className="education-period">
+                  <span className={`education-dot dot-${index}`} />
+                  {item.period}
+                </p>
+                <h3>{item.school}</h3>
+                <p>{item.credential}</p>
+                <p className="education-note">{item.note}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section
+          id="contact"
+          className="contact-section"
+          aria-labelledby="contact-title"
+        >
+          <div className="contact-copy">
+            <p className="section-label">
+              <span className="status-dot" />
+              {labels.contactLabel}
+            </p>
+            <h2 id="contact-title">
+              {labels.contactTitle[0]}
+              <br />
+              {labels.contactTitle[1]}
+            </h2>
+            <p>{labels.contactIntro}</p>
+            <a className="contact-email" href={`mailto:${email}`}>
+              {email}
+              <ArrowUpRight size={25} aria-hidden="true" />
             </a>
           </div>
-          <div className="mt-7 grid gap-3 font-mono text-sm text-ink/66 sm:grid-cols-3">
-            <p className="flex min-w-0 items-center gap-2 break-all">
-              <Mail className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
-              {email}
-            </p>
-            <p className="flex min-w-0 items-center gap-2">
-              <Phone className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
-              {phone}
-            </p>
-            <p className="flex min-w-0 items-center gap-2">
-              <MapPin className="h-4 w-4 shrink-0 text-blueprint" aria-hidden="true" />
-              {copy.contact.location}
-            </p>
-          </div>
-        </div>
-        <footer className="flex items-center justify-between gap-4 py-8 font-mono text-sm text-ink/46">
-          <p>(c) 2026 Ghassen Jemiai</p>
           <a
-            href="#top"
-            className="inline-flex items-center gap-1 transition hover:text-blueprint"
+            className="contact-arrow"
+            href={`mailto:${email}`}
+            aria-label={`${labels.contact} — ${email}`}
           >
-            {copy.actions.top}
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowUpRight strokeWidth={1} aria-hidden="true" />
           </a>
-        </footer>
-      </section>
-    </main>
+          <div className="contact-bottom">
+            <span>
+              <MapPin size={15} aria-hidden="true" />
+              {copy.contact.location}
+            </span>
+            <a href="tel:+393520599620">{phone}</a>
+          </div>
+          <Asterisk
+            className="contact-asterisk"
+            strokeWidth={1}
+            aria-hidden="true"
+          />
+        </section>
+      </main>
+      <footer className="site-footer container">
+        <a href="#top" className="footer-name">
+          Ghassen Jemiai<span>© 2026</span>
+        </a>
+        <p>{labels.footer}</p>
+        <a href="#top" className="back-to-top">
+          {labels.back}
+          <ArrowUp size={15} aria-hidden="true" />
+        </a>
+      </footer>
+    </>
   );
 }

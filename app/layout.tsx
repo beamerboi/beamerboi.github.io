@@ -14,6 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          src="https://analytics.northlinestudio.io/api/script.js"
+          data-site-id="88086660b315"
+          defer
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -21,6 +21,8 @@ import {
   X,
 } from "lucide-react";
 import { content, ui } from "./content";
+import { GitHubActivity } from "./github-activity";
+import { SocialLinks } from "./social-links";
 
 type Language = "en" | "it";
 type Theme = "light" | "dark";
@@ -383,7 +385,7 @@ function Skills({
       className="section toolkit-section"
       aria-labelledby="skills-title"
     >
-      <SectionLabel number="03">{labels.toolkitLabel}</SectionLabel>
+      <SectionLabel number="04">{labels.toolkitLabel}</SectionLabel>
       <div className="section-heading">
         <h2 id="skills-title">{labels.toolkitTitle}</h2>
       </div>
@@ -515,6 +517,7 @@ export default function Home() {
   }
   const navLinks = [
     { href: "#projects", label: labels.work },
+    { href: "#github", label: "GitHub" },
     { href: "#experience", label: labels.about },
     { href: "#skills", label: labels.toolkit },
   ];
@@ -666,6 +669,7 @@ export default function Home() {
                 <Download size={16} aria-hidden="true" />
               </a>
             </div>
+            <SocialLinks language={language} />
           </div>
           <HeroArtwork caption={labels.illustration} />
         </section>
@@ -694,13 +698,14 @@ export default function Home() {
           </a>
         </aside>
         <Projects copy={copy.projects} labels={labels} />
+        <GitHubActivity language={language} />
         <section
           id="experience"
           className="section experience-section"
           aria-labelledby="experience-title"
         >
           <div className="experience-intro">
-            <SectionLabel number="02">{labels.experienceLabel}</SectionLabel>
+            <SectionLabel number="03">{labels.experienceLabel}</SectionLabel>
             <h2 id="experience-title">{labels.experienceTitle}</h2>
             <p>{labels.experienceIntro}</p>
             <a
@@ -755,7 +760,7 @@ export default function Home() {
           className="section education-section"
           aria-labelledby="education-title"
         >
-          <SectionLabel number="04">{labels.educationLabel}</SectionLabel>
+          <SectionLabel number="05">{labels.educationLabel}</SectionLabel>
           <div className="section-heading">
             <h2 id="education-title">{labels.educationTitle}</h2>
             <GraduationCap size={31} strokeWidth={1.3} aria-hidden="true" />
@@ -808,6 +813,7 @@ export default function Home() {
               {copy.contact.location}
             </span>
             <a href="tel:+393520599620">{phone}</a>
+            <SocialLinks language={language} />
           </div>
           <Asterisk
             className="contact-asterisk"

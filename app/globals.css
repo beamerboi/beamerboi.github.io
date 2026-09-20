@@ -1264,6 +1264,38 @@ h2 {
   font-size: 10px;
   z-index: 1;
 }
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  color: var(--subtle);
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.social-links a:hover {
+  color: var(--blue);
+}
+.social-links a > svg:last-child {
+  color: var(--muted);
+}
+.social-handle {
+  color: var(--muted);
+  font-size: 10px;
+  margin-left: 3px;
+}
+.hero-copy > .social-links {
+  margin-top: 22px;
+}
+.contact-bottom > .social-links {
+  margin-left: auto;
+}
 .contact-bottom > span {
   display: flex;
   align-items: center;

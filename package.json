@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test:blog": "node --test tests/blog.test.mjs && node scripts/check-blog-build.mjs"
+    "test:blog": "node --test tests/blog.test.mjs tests/production-env.test.mjs && node scripts/check-blog-build.mjs"
   },
   "dependencies": {
     "lucide-react": "0.468.0",

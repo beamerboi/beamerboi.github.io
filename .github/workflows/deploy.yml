@@ -36,14 +36,16 @@ jobs:
         run: npm ci
 
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          node scripts/check-production-env.mjs
+          npm run build
         env:
-          STRAPI_URL: ${{ vars.STRAPI_URL }}
+          STRAPI_URL: ${{ vars.STRAPI_URL || 'https://strapi.northlinestudio.io' }}
           STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
-          STRAPI_API_VERSION: ${{ vars.STRAPI_API_VERSION }}
-          STRAPI_ARTICLES_PATH: ${{ vars.STRAPI_ARTICLES_PATH }}
+          STRAPI_API_VERSION: ${{ vars.STRAPI_API_VERSION || '5' }}
+          STRAPI_ARTICLES_PATH: ${{ vars.STRAPI_ARTICLES_PATH || '/api/articles' }}
           STRAPI_LOCALE: ${{ vars.STRAPI_LOCALE }}
-          SITE_URL: ${{ vars.SITE_URL }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://beamerboi.github.io' }}
 
       - name: Disable Jekyll
         run: touch ./out/.nojekyll

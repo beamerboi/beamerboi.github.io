@@ -87,7 +87,11 @@ In the portfolio repository's **Settings → Secrets and variables → Actions**
 | Optional variable   | `STRAPI_LOCALE`        | A locale configured in Strapi                            |
 | Optional variable   | `SITE_URL`             | Your public portfolio URL, including any project subpath |
 
-The deployment workflow already reads these settings. GitHub's build runner must be able to reach Strapi over HTTPS, and image URLs returned by Strapi must be reachable by visitors. If your CMS is private to a network, the builder must be hosted on that network or given access.
+The deployment workflow defaults to `https://strapi.northlinestudio.io`, API version `5`, `/api/articles`, and public site URL `https://beamerboi.github.io`. Repository variables override these defaults. The only required GitHub setting for this setup is the repository Actions secret `STRAPI_API_TOKEN`; the build fails clearly if it is missing. Use repository-level secrets because the build job runs before the `github-pages` deployment environment.
+
+Keep credentials in ignored `.env.local` for local work and in GitHub Actions secrets for deployment. Do not commit `.env.production`: workflow environment variables take precedence over env files, including empty values. A token that was committed and pushed must be revoked and replaced; deleting the current file does not remove it from Git history.
+
+GitHub's build runner must be able to reach Strapi over HTTPS, and image URLs returned by Strapi must be reachable by visitors. If your CMS is private to a network, the builder must be hosted on that network or given access.
 
 After publishing, updating, unpublishing, or deleting content, run **Actions → Deploy Next.js site to Pages → Run workflow**. Only a successful rebuild and deployment updates the static blog, article URLs, and sitemap. Old published pages remain online until that deployment completes, including after an unpublish. Changing an article slug changes its URL and does not create a redirect.
 

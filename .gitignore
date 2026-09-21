@@ -4,6 +4,7 @@ node_modules/
 out/
 dist/
 coverage/
+.env*
 !.env.example
 *.tsbuildinfo
 npm-debug.log*

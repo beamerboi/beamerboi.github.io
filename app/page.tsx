@@ -23,6 +23,7 @@ import {
 import { content, ui } from "./content";
 import { GitHubActivity } from "./github-activity";
 import { SocialLinks } from "./social-links";
+import { assetPath } from "./site";
 
 type Language = "en" | "it";
 type Theme = "light" | "dark";
@@ -520,6 +521,7 @@ export default function Home() {
     { href: "#github", label: "GitHub" },
     { href: "#experience", label: labels.about },
     { href: "#skills", label: labels.toolkit },
+    { href: assetPath("blog/"), label: "Blog" },
   ];
 
   return (

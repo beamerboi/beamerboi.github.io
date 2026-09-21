@@ -6,6 +6,9 @@ const basePath = isProjectPages ? `/${repositoryName}` : "";
 
 const nextConfig = {
   output: "export",
+  // Keep fixture exports separate from the deployable site in out/.
+  distDir: process.env.BLOG_BUILD_CHECK === "true" ? ".blog-test-output" : ".next",
+  trailingSlash: true,
   images: { unoptimized: true },
   basePath,
   assetPrefix: basePath,

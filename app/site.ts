@@ -1,6 +1,6 @@
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const deploymentUrl =
-  process.env.SITE_URL ?? `https://beamerboi.github.io${basePath}`;
+  process.env.SITE_URL?.trim() || `https://beamerboi.github.io${basePath}`;
 
 export const site = {
   name: "Ghassen Jemiai",

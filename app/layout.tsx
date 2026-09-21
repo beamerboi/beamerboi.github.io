@@ -77,13 +77,13 @@ export const viewport: Viewport = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
+  "@type": "WebSite",
   "@id": site.url.href,
   url: site.url.href,
   name: site.title,
   description: site.description,
   inLanguage: ["en", "it"],
-  mainEntity: {
+  author: {
     "@type": "Person",
     "@id": new URL("#ghassen-jemiai", site.url).href,
     name: site.name,
@@ -114,11 +114,14 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
-        <script
-          src="https://analytics.northlinestudio.io/api/script.js"
-          data-site-id="88086660b315"
-          defer
-        />
+        {process.env.NODE_ENV === "production" &&
+          process.env.BLOG_BUILD_CHECK !== "true" && (
+            <script
+              src="https://analytics.northlinestudio.io/api/script.js"
+              data-site-id="88086660b315"
+              defer
+            />
+          )}
       </head>
       <body>{children}</body>
     </html>

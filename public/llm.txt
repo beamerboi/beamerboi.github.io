@@ -1,0 +1,7 @@
+# Ghassen Jemiai
+
+> Software engineer based in Italy, building SaaS products, web applications, AI systems, and workflow automation.
+
+## Portfolio overview
+
+- [LLM-readable portfolio](./llms.txt): Full overview with experience, skills, education, projects, CV, and contact links.

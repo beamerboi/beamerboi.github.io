@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "assets": "node scripts/generate-brand-assets.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."

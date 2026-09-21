@@ -1,0 +1,34 @@
+# Ghassen Jemiai
+
+> Ghassen Jemiai is a software engineer based in Italy, building SaaS products, web applications, AI systems, and workflow automation.
+
+This personal portfolio is available in English and Italian on a single page. It covers professional experience, independent projects, technical skills, education, and public contact details.
+
+Ghassen is studying for a master's degree in computer science at Università di Firenze and building ReGuardian. ReGuardian and ScopePilot are in development; Kavoo is a concept.
+
+## Portfolio
+
+- [Home](./): Introduction and current focus.
+- [Experience](./#experience): Product Development Engineer at Chicks Group Inc (Sep 2023 - Mar 2026), Software Engineer at Focus Corporation (Jan 2023 - Aug 2025), and Software Engineering Intern at OneTech Business Solutions (Feb 2023 - May 2023). Work includes SaaS features, payments, enterprise applications, AI architectures, retrieval-augmented generation (RAG), and banking microservices.
+- [Skills](./#skills): Backend and systems with .NET Core, C#, Java, Spring Framework, Django, FastAPI, microservices, and Kafka; AI and automation with Python, RAG, and agents; frontend with Angular, AureliaJS, Next.js, TypeScript, Tailwind CSS, and Bootstrap; data and infrastructure with SQL Server, MySQL, PostgreSQL, MongoDB, and Docker.
+- [Education](./#education): Master's Degree in Computer Science at Università di Firenze (Sep 2025 - Present), Degree in Engineering at SESAME (Sep 2023 - Jul 2025), and Bachelor's Degree in Computer Science at University of Tunis El Manar (Sep 2020 - Jun 2023).
+- [CV](./my-cv.pdf): Downloadable curriculum vitae in PDF format.
+- [Contact](./#contact): Public contact details and social profiles.
+
+## Projects
+
+- [ReGuardian](https://reguardian.northlinestudio.io/): AI-backed compliance automation for UK employment contracts, in development. Analyzes clauses, maps them to UK employment law and UK GDPR, flags impacted sections, and keeps audit trails for HR and legal review.
+- [ScopePilot](https://scopepilot.io/): AI SaaS product in development. Analyzes client requests, detects scope drift, and generates change orders with cost estimates.
+- [Kavoo](https://kavoo.io/): Geo-social product concept for discovering nearby activities, places, and social plans.
+
+## Profiles and contact
+
+- [GitHub](https://github.com/beamerboi): Public development profile and repositories.
+- [X](https://x.com/jemi3i): Public social profile, @jemi3i.
+- [Email](mailto:ghassen.jemaii2@gmail.com): Direct contact for ideas, projects, and collaboration.
+
+## Optional
+
+- [GitHub activity](./#github): Development activity displayed on the portfolio.
+- [Sitemap](./sitemap.xml): Site URL index.
+- [Robots](./robots.txt): Crawler access rules.

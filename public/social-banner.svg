@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <title>Ghassen Jemiai — Software Engineer</title>
+  <desc>Good ideas. Great software. A portfolio of web, AI, and SaaS products, with a blue, lavender, and lime stacked-block illustration.</desc>
+  <rect width="1200" height="630" fill="#FEFEFD"/>
+  <rect x="24.5" y="24.5" width="1151" height="581" rx="20" stroke="#E6E7E1"/>
+
+  <g transform="translate(68 61) scale(.8)">
+    <rect x=".5" y=".5" width="63" height="63" rx="15.5" fill="#FEFEFD" stroke="#E6E7E1"/>
+    <g transform="translate(2 -3)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="21" cy="33" rx="10" ry="10.5" stroke="#20211F"/>
+      <path d="M31 23v21c0 7-3.5 11-10 11-3.5 0-6.5-1-9-3" stroke="#20211F"/>
+      <path d="M46 24v21c0 7-3 10-9 10" stroke="#3D5EE7"/>
+    </g>
+    <circle cx="48" cy="11.5" r="3.75" fill="#3D5EE7"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="135" y="82" font-size="20" font-weight="600" letter-spacing="-.5" fill="#20211F">Ghassen Jemiai</text>
+    <text x="135" y="103" font-size="13" fill="#6C6F65">Software engineer</text>
+    <circle cx="984" cy="85" r="4" fill="#829C54"/>
+    <text x="998" y="89" font-size="11" letter-spacing="1.5" fill="#53564F">BASED IN ITALY</text>
+
+    <text x="68" y="251" font-size="76" font-weight="600" letter-spacing="-4" fill="#20211F">Good ideas.</text>
+    <text x="68" y="335" font-size="76" font-weight="600" letter-spacing="-4" fill="#3D5EE7">Great software.</text>
+    <path d="M71 350Q326 337 588 346" stroke="#3D5EE7" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+    <text x="70" y="408" font-size="21" fill="#53564F">Thoughtful digital products.</text>
+    <text x="70" y="442" font-size="21" fill="#53564F">Web, AI, and everything in between.</text>
+  </g>
+
+  <circle cx="929" cy="305" r="170" stroke="#E6E7E1"/>
+  <circle cx="929" cy="305" r="141" stroke="#EFF0EA" stroke-dasharray="3 8"/>
+  <path d="M741 208h14m-7-7v14M1092 411h14m-7-7v14" stroke="#AFA0E5" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="1074" cy="184" r="5" fill="#E2F3B9"/>
+  <g transform="translate(709 109) scale(.88)">
+    <ellipse cx="247" cy="405" rx="145" ry="19" fill="#20211F" opacity=".035"/>
+    <g stroke="#202620" stroke-width="1.3" stroke-linejoin="round">
+      <path d="M94 278 249 195 404 278 249 366Z" fill="#DDFC87"/>
+      <path d="M94 278 249 366V394L94 307Z" fill="#B9D868"/>
+      <path d="M249 366 404 278V307L249 394Z" fill="#C8E977"/>
+    </g>
+    <path d="m122 278 126-68 126 68-126 71Z" stroke="#8DAD4C" stroke-dasharray="4 5"/>
+    <g stroke="#292238" stroke-width="1.3" stroke-linejoin="round">
+      <path d="M112 187 249 113 386 187 249 263Z" fill="#D8CEFD"/>
+      <path d="M112 187 249 263V302L112 227Z" fill="#AFA0E5"/>
+      <path d="M249 263 386 187V227L249 302Z" fill="#C1B3F1"/>
+    </g>
+    <path d="m183 192 39-21m13 50 79-43m-116 24 39-21" stroke="#8171B2" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#F4F0FF"><circle cx="135" cy="213" r="3"/><circle cx="148" cy="220" r="3"/><circle cx="161" cy="227" r="3"/></g>
+    <g stroke="#1C328A" stroke-width="1.3" stroke-linejoin="round">
+      <path d="M135 100 249 39 363 100 249 164Z" fill="#597AFA"/>
+      <path d="M135 100 249 164V214L135 151Z" fill="#3155DC"/>
+      <path d="M249 164 363 100V151L249 214Z" fill="#4266ED"/>
+    </g>
+    <path d="m224 82-29 16 29 16m49-32 29 16-29 16m-17-40-17 49" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m270 177 20-11m10-5 10-6" stroke="#AABEFF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M87 182H53V121H87M410 205h25v63h-25" stroke="#20211F" stroke-opacity=".2" stroke-dasharray="4 5"/>
+    <circle cx="53" cy="121" r="4" fill="#4266ED"/>
+    <circle cx="435" cy="268" r="4" fill="#AFA0E5"/>
+  </g>
+  <g transform="translate(743 468) rotate(-4)">
+    <rect width="197" height="37" rx="7" fill="#FEFEFD" stroke="#E6E7E1"/>
+    <path d="m20 13-6 5.5 6 5.5m10-11 6 5.5-6 5.5m-3-14-4 17" stroke="#3D5EE7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="48" y="23" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#53564F">engineered with care</text>
+  </g>
+
+  <path d="M68 534H1132" stroke="#E6E7E1"/>
+  <text x="68" y="572" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#53564F">beamerboi.github.io</text>
+  <g transform="translate(230 561)" stroke="#3D5EE7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M0 11 11 0M0 0h11v11"/></g>
+  <text x="1132" y="571" text-anchor="end" font-family="Courier New, monospace" font-size="11" letter-spacing="2" fill="#6C6F65">WEB / AI / SAAS</text>
+</svg>
